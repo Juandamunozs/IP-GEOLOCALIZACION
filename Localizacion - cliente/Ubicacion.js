@@ -46,9 +46,19 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     obtenerLocalizacion();
+    setInterval(obtenerLocalizacion, 5000); 
 });
 
 function obtenerLocalizacion() {
+
+    const tiempo = new Date();
+
+    const hora = tiempo.getHours();
+    const minutos = tiempo.getMinutes();
+    const segundos = tiempo.getSeconds();
+
+    console.log(`Rastreando en la Hora: ${hora}:${minutos}:${segundos}`);
+
     fetch('https://ipapi.co/json/')
         .then(response => {
             if (!response.ok) {
@@ -57,7 +67,6 @@ function obtenerLocalizacion() {
             return response.json();
         })
         .then(data => {
-
             console.log(data);
 
             const locationInfo = `
@@ -86,9 +95,7 @@ function obtenerLocalizacion() {
             Código de región: ${data.region_code}<br>
             UTC Offset: ${data.utc_offset}<br>
             Versión: ${data.version}<br>
-        `;
-        
-        
+            `;
 
             document.getElementById('location').innerHTML = locationInfo;
             document.getElementById('error').textContent = '';
@@ -97,3 +104,4 @@ function obtenerLocalizacion() {
             document.getElementById('error').textContent = `No se pudo obtener la localización: ${error.message}`;
         });
 }
+
