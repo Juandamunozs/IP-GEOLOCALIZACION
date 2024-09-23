@@ -47,7 +47,7 @@
 // VERSION ILIMITADA
 document.addEventListener('DOMContentLoaded', () => {
     obtenerLocalizacion();
-    setInterval(obtenerLocalizacion, 5000);
+    setInterval(obtenerLocalizacion, 60000);
 });
 
 function obtenerLocalizacion() {
@@ -99,7 +99,7 @@ function obtenerLocalizacion() {
             document.getElementById('error').textContent = '';
 
             // Llamar a la API de Nominatim
-            return fetch(`https://nominatim.openstreetmap.org/reverse?lat=${data.latitude}&lon=${data.longitude}&format=json`);
+            return fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`);
         })
         .then(response => {
             if (!response.ok) {
@@ -108,18 +108,22 @@ function obtenerLocalizacion() {
             return response.json();
         })
         .then(geocodeData => {
-            //const address = geocodeData.address;
-            const neighborhood = geocodeData.display_name || 'No disponible';
+            //console.log(geocodeData);
 
-           // console.log('Datos del barrio: ', geocodeData);
-
-            document.getElementById('location').innerHTML += `<h3>Barrio: ${neighborhood}</h3>`;
-
-            //console.log('la longitud es: ', geocodeData.lon, 'la latitud es: ', geocodeData.lat);
+            const address = [
+                geocodeData.address.house_number || 'N/A',
+                geocodeData.address.road || 'N/A',
+                geocodeData.address.neighbourhood || 'N/A',
+                geocodeData.address.city_district || 'N/A',
+                geocodeData.address.city || 'N/A',
+                geocodeData.address.state || 'N/A',
+                geocodeData.address.country || 'N/A'
+            ].join(', ');
+            
+            document.getElementById('location').innerHTML += `<h3>Dirección:</h3> ${address}`;
 
             // Llamar a la API de OpenWeatherMap
             return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geocodeData.lat}&lon=${geocodeData.lon}&appid=b46111016fc6b418a44b86687a13ddb8&units=metric`);
-
         })
         .then(response => {
             if (!response.ok) {
@@ -137,11 +141,13 @@ function obtenerLocalizacion() {
             `;
 
             document.getElementById('location').innerHTML += weatherInfo;
+            //console.log(weatherData);
         })
         .catch(error => {
             document.getElementById('error').textContent = `No se pudo obtener la localización: ${error.message}`;
         });
 }
+
 
 
 
