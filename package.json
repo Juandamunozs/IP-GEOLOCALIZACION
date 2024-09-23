@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "start": "node Localizacion - server/Ubicacion.js"
+     "start": "node Localizacion-server/Ubicacion.js"
   },
   "repository": {
     "type": "git",

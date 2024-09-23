@@ -3,7 +3,7 @@ const axios = require('axios');
 async function obtenerLocalizacion() {
     try {
         const response = await axios.get('https://ipapi.co/json/');
-        console.log(response.data); // Imprime los datos en la consola
+        console.log('Los datos encontrados de la ubicacion son: ', response.data); 
     } catch (error) {
         console.error('Error al obtener la localización:', error.message);
     }
