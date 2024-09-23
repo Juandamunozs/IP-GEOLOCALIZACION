@@ -53,11 +53,25 @@ function obtenerLocalizacion() {
 
     const tiempo = new Date();
 
-    const hora = tiempo.getHours();
-    const minutos = tiempo.getMinutes();
-    const segundos = tiempo.getSeconds();
+    let hora = tiempo.getHours();
 
-    console.log(`Rastreando en la Hora: ${hora}:${minutos}:${segundos}`);
+    if (hora < 10) {
+        hora = '0' + hora;
+    }
+
+    let minutos = tiempo.getMinutes();
+
+    if (minutos < 10) {
+        minutos = '0' + minutos;
+    }
+
+    let segundos = tiempo.getSeconds();
+
+    if (segundos < 10) {
+        segundos = '0' + segundos;
+    }
+
+    //console.log(`Rastreando en la Hora: ${hora}:${minutos}:${segundos}`);
 
     fetch('https://ipapi.co/json/')
         .then(response => {
@@ -70,6 +84,7 @@ function obtenerLocalizacion() {
             console.log(data);
 
             const locationInfo = `
+            Horario: ${hora}:${minutos}:${segundos}<br>
             IP: ${data.ip}<br>
             ASN: ${data.asn}<br>
             Ciudad: ${data.city}<br>
