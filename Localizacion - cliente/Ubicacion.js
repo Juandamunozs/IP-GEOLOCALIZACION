@@ -57,31 +57,38 @@ function obtenerLocalizacion() {
             return response.json();
         })
         .then(data => {
+
+            console.log(data);
+
             const locationInfo = `
-                IP: ${data.ip}<br>
-                ASN: ${data.asn}<br>
-                Ciudad: ${data.city}<br>
-                País: ${data.country_name}<br>
-                Región: ${data.region}<br>
-                Código postal: ${data.postal}<br>
-                Capital: ${data.country_capital}<br>
-                Área del país: ${data.country_area} km²<br>
-                Población: ${data.country_population}<br>
-                Latitud: ${data.latitude}<br>
-                Longitud: ${data.longitude}<br>
-                Zona horaria: ${data.timezone}<br>
-                Organización: ${data.org}<br>
-                Idiomas: ${data.languages}<br>
-                Código de país: ${data.country_code}<br>
-                TLD del país: ${data.country_tld}<br>
-                Moneda: ${data.currency} (${data.currency_name})<br>
-                Código de llamada: ${data.country_calling_code}<br>
-                En la UE: ${data.in_eu}<br>
-                Continent Code: ${data.continent_code}<br>
-                Network: ${data.network}<br>
-                UTC Offset: ${data.utc_offset}<br>
-                Versión: ${data.version}<br>
-            `;
+            IP: ${data.ip}<br>
+            ASN: ${data.asn}<br>
+            Ciudad: ${data.city}<br>
+            País: ${data.country_name}<br>
+            Región: ${data.region}<br>
+            Código postal: ${data.postal}<br>
+            Capital: ${data.country_capital}<br>
+            Área del país: ${data.country_area} km²<br>
+            Población: ${data.country_population}<br>
+            Latitud: ${data.latitude}<br>
+            Longitud: ${data.longitude}<br>
+            Zona horaria: ${data.timezone}<br>
+            Organización: ${data.org}<br>
+            Idiomas: ${data.languages}<br>
+            Código de país: ${data.country_code}<br>
+            Código de país ISO3: ${data.country_code_iso3}<br>
+            TLD del país: ${data.country_tld}<br>
+            Moneda: ${data.currency} (${data.currency_name})<br>
+            Código de llamada: ${data.country_calling_code}<br>
+            En la UE: ${data.in_eu}<br>
+            Continent Code: ${data.continent_code}<br>
+            Network: ${data.network}<br>
+            Código de región: ${data.region_code}<br>
+            UTC Offset: ${data.utc_offset}<br>
+            Versión: ${data.version}<br>
+        `;
+        
+        
 
             document.getElementById('location').innerHTML = locationInfo;
             document.getElementById('error').textContent = '';
