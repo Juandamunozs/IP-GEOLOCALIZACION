@@ -9,7 +9,7 @@ function obtenerLocalizacion() {
     const minutos = String(tiempo.getMinutes()).padStart(2, '0');
     const segundos = String(tiempo.getSeconds()).padStart(2, '0');
 
-    obtenerDispositivo();
+    //obtenerDispositivo();
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(success, error);
